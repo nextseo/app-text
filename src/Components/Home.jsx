@@ -63,7 +63,7 @@ const Home = () => {
         toast.success(res.data.message);
         setTimeout(() => {
           fetchData();
-        }, 2000);
+        }, 5000);
       }
     } catch (error) {
       console.log(error);
@@ -83,7 +83,7 @@ const Home = () => {
         toast.success(res.data.message);
         setTimeout(() => {
           fetchData2();
-        }, 4000);
+        }, 5000);
       }
     } catch (error) {
       console.log(error);
