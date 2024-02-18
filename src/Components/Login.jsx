@@ -24,7 +24,9 @@ const Login = () => {
   };
   return (
     <div className="bg-gray-200 h-screen flex justify-center">
-      <div className="bg-white mx-60 my-40 px-10 py-10">
+      <div className="bg-white mx-60 my-40 px-10 py-5 rounded-lg">
+
+        <h1 className="text-3xl text-center mb-4">เข้าสู่ระบบ</h1>
         <form onSubmit={handleLogin}>
           <input
             type="text"
@@ -43,7 +45,7 @@ const Login = () => {
 
           />
           <br /><br />
-          <button className="mt-2 bg-black text-white px-2 py-2 rounded-md" type="submit">เข้าสู่ระบบ</button>
+          <button className="mt-0 w-full bg-black text-white px-2 py-2 rounded-md" type="submit">เข้าสู่ระบบ</button>
         </form>
       </div>
     </div>

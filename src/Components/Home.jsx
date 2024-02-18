@@ -6,14 +6,12 @@ const Home = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
-  const highlights = [
-    [23, 31],
-    [14, 15],
-  ]; // ตำแหน่งที่ต้องการไฮไลท์ในรูปแบบของ array
+
   const [hilight, setHiLight] = useState(null);
 
   //   คำผิด
   const fetchData = async () => {
+    setData2([]);
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_APP_API}/api/text_wrong`
@@ -28,6 +26,7 @@ const Home = () => {
 
   //  คำต้องห้าม
   const fetchData2 = async () => {
+    setData([]);
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_APP_API}/api/find_word`
@@ -63,7 +62,7 @@ const Home = () => {
         toast.success(res.data.message);
         setTimeout(() => {
           fetchData();
-        }, 5000);
+        }, 4000);
       }
     } catch (error) {
       console.log(error);
@@ -83,12 +82,20 @@ const Home = () => {
         toast.success(res.data.message);
         setTimeout(() => {
           fetchData2();
-        }, 5000);
+        }, 4000);
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response.data);
     }
+  };
+
+  // Reset ปุ่ม
+  const resetBtn = () => {
+    setHiLight(null);
+    setData([]);
+    setData2([]);
+    setText("")
   };
 
   useEffect(() => {}, [data2]);
@@ -98,12 +105,15 @@ const Home = () => {
       {/* {JSON.stringify(hilight)} */}
       <div className="flex flex-col md:flex-row gap-4 ">
         <div className="w-full mx-10 ">
-          <h2 className="text-lg text-gray-700 font-semibold">กรอกข้อความที่ต้องการ</h2>
+          <h2 className="text-lg text-gray-700 font-semibold">
+            กรอกข้อความที่ต้องการ
+          </h2>
           <div className="mt-5 ">
             {hilight ? (
               <HighlightedText text={text} highlights={hilight} />
             ) : (
               <textarea
+              value={text || ""}
                 className="w-full shadow-lg rounded-md h-96 py-5 px-10"
                 onChange={(e) => setText(e.target.value)}
               />
@@ -134,7 +144,7 @@ const Home = () => {
               คำผิด
             </button>
             <button
-              onClick={()=>setHiLight(null)}
+              onClick={resetBtn}
               className={"bg-green-700 text-white py-2 px-2 rounded-md"}
             >
               รีเซ็ท
