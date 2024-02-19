@@ -60,9 +60,10 @@ const Home = () => {
       console.log(res);
       if (res.status === 200) {
         toast.success(res.data.message);
-        setTimeout(() => {
-          fetchData();
-        }, 4000);
+        // setTimeout(() => {
+        //   fetchData();
+        // }, 4000);
+        fetchData();
       }
     } catch (error) {
       console.log(error);
@@ -80,9 +81,10 @@ const Home = () => {
       console.log(res);
       if (res.status === 200) {
         toast.success(res.data.message);
-        setTimeout(() => {
-          fetchData2();
-        }, 4000);
+        // setTimeout(() => {
+        //   fetchData2();
+        // }, 4000);
+        fetchData2();
       }
     } catch (error) {
       console.log(error);
