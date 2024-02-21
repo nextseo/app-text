@@ -4,49 +4,50 @@ import { toast } from "react-toastify";
 
 const Home = () => {
   const [text, setText] = useState("");
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  const [data_1, setData_1] = useState("")
 
   const [hilight, setHiLight] = useState(null);
 
   //   คำผิด
-  const fetchData = async () => {
-    setData2([]);
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/api/text_wrong`
-      );
-      if (res.status === 200) {
-        setData(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchData = async () => {
+  //   setData2([]);
+  //   try {
+  //     const res = await axios.get(
+  //       `${import.meta.env.VITE_APP_API}/api/text_wrong`
+  //     );
+  //     if (res.status === 200) {
+  //       setData(res.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   //  คำต้องห้าม
-  const fetchData2 = async () => {
-    setData([]);
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/api/find_word`
-      );
-      console.log(res.data);
-      if (res.status === 200) {
-        setData2(res.data);
+  // const fetchData2 = async () => {
+  //   setData([]);
+  //   try {
+  //     const res = await axios.get(
+  //       `${import.meta.env.VITE_APP_API}/api/find_word`
+  //     );
+  //     console.log(res.data);
+  //     if (res.status === 200) {
+  //       setData2(res.data);
 
-        const newData = res.data.map((item) => {
-          return {
-            start: item.startword,
-            end: item.endword + 1,
-          };
-        });
-        setHiLight(newData);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //       const newData = res.data.map((item) => {
+  //         return {
+  //           start: item.startword,
+  //           end: item.endword + 1,
+  //         };
+  //       });
+  //       setHiLight(newData);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // คำผิด
   const handleTextWrong = async () => {
@@ -57,13 +58,10 @@ const Home = () => {
           text,
         }
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
-        toast.success(res.data.message);
-        // setTimeout(() => {
-        //   fetchData();
-        // }, 4000);
-        fetchData();
+        toast.success('ทำรายการสำเร็จ');
+        setData_1(res.data)
       }
     } catch (error) {
       console.log(error);
@@ -78,13 +76,11 @@ const Home = () => {
         `${import.meta.env.VITE_APP_API}/api/find_word`,
         { text }
       );
-      console.log(res);
+   
       if (res.status === 200) {
-        toast.success(res.data.message);
-        // setTimeout(() => {
-        //   fetchData2();
-        // }, 4000);
-        fetchData2();
+        toast.success('ทำรายการสำเร็จ');
+    
+    
       }
     } catch (error) {
       console.log(error);
@@ -95,7 +91,7 @@ const Home = () => {
   // Reset ปุ่ม
   const resetBtn = () => {
     setHiLight(null);
-    setData([]);
+    setData_1("");
     setData2([]);
     setText("")
   };
@@ -160,28 +156,29 @@ const Home = () => {
           <div className="bg-white border-2 border-gray-300 shadow-md rounded-md px-5 py-5 mt-5">
             <h2 className="text-lg text-gray-900 font-semibold">คำต้องห้าม</h2>
 
-            <ul className="mt-2">
+            {/* <ul className="mt-2">
               {data2.map((item, index) => (
                 <li key={index} className="flex flex-row justify-between mt-1">
                   - {item.stopwordgroup}{" "}
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             <hr className="border-1 border-gray-300 mt-10" />
 
             <h2 className="text-lg text-gray-900 mt-10 font-semibold">คำผิด</h2>
 
-            <ul className="mt-2">
+            <p>{data_1 || ""}</p>
+
+            {/* <ul className="mt-2">
               {data.map((item, index) => (
                 <li key={index} className="flex flex-row justify-between mt-1">
                   {item.editword}{" "}
-                  {/* <button className="bg-red-500 px-2 py-1 rounded-md text-white">
-                    ลบ
-                  </button> */}
+                  
                 </li>
               ))}
-            </ul>
+            </ul> */}
+
           </div>
         </div>
       </div>
