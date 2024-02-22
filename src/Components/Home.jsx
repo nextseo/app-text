@@ -10,44 +10,6 @@ const Home = () => {
 
   const [hilight, setHiLight] = useState(null);
 
-  //   คำผิด
-  // const fetchData = async () => {
-  //   setData2([]);
-  //   try {
-  //     const res = await axios.get(
-  //       `${import.meta.env.VITE_APP_API}/api/text_wrong`
-  //     );
-  //     if (res.status === 200) {
-  //       setData(res.data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  //  คำต้องห้าม
-  // const fetchData2 = async () => {
-  //   setData([]);
-  //   try {
-  //     const res = await axios.get(
-  //       `${import.meta.env.VITE_APP_API}/api/find_word`
-  //     );
-  //     console.log(res.data);
-  //     if (res.status === 200) {
-  //       setData2(res.data);
-
-  //       const newData = res.data.map((item) => {
-  //         return {
-  //           start: item.startword,
-  //           end: item.endword + 1,
-  //         };
-  //       });
-  //       setHiLight(newData);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   // คำผิด
   const handleTextWrong = async () => {
@@ -76,17 +38,38 @@ const Home = () => {
         `${import.meta.env.VITE_APP_API}/api/find_word`,
         { text }
       );
+
+      console.log(res.data);
    
       if (res.status === 200) {
         toast.success('ทำรายการสำเร็จ');
-    
-    
+        const test = JSON.parse(res.data)
+        setHiLight(test)
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response.data);
     }
   };
+
+  // ภาษาอังกฤษ
+  const handleEnglish = async()=>{
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_APP_API}/api/english`,
+        { text }
+      );
+
+   
+      if (res.status === 200) {
+        toast.success('ทำรายการสำเร็จ');
+        setData_1(res.data)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data);
+    }
+  }
 
   // Reset ปุ่ม
   const resetBtn = () => {
@@ -134,16 +117,18 @@ const Home = () => {
               onClick={handleTextWrong}
               className={
                 hilight
-                  ? "bg-red-800 text-white py-2 px-2 rounded-md"
-                  : "bg-red-500 text-white py-2 px-2 rounded-md"
+                  ? "bg-red-800 hover:bg-red-900 text-white py-2 px-2 rounded-md"
+                  : "bg-red-500 hover:bg-red-600 text-white py-2 px-2 rounded-md"
               }
               disabled={hilight !== null}
             >
               คำผิด
             </button>
+
+            <button onClick={handleEnglish} className={"bg-blue-800 hover:bg-blue-900 text-white py-2 px-2 rounded-md"}>ภาษาอังกฤษ</button>
             <button
               onClick={resetBtn}
-              className={"bg-green-700 text-white py-2 px-2 rounded-md"}
+              className={"bg-green-700 hover:bg-green-800 text-white py-2 px-2 rounded-md"}
             >
               รีเซ็ท
             </button>
@@ -223,3 +208,4 @@ const HighlightedText = ({ text, highlights }) => {
 
 // ข้อความต้นฉบับ = กระตุ้นสมองให้ไวด้วยการเพิ่มขนาด
 // ข้อความที่ได้ = กระตุ้นสมองให้ไวด้วยการเพิ่มขนาไวด้วยการเพิ่มขนาไวด้วยการเพิ่มขนาด
+
