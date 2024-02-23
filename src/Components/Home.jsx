@@ -85,7 +85,7 @@ const Home = () => {
     <div>
       {/* {JSON.stringify(hilight)} */}
       <div className="flex flex-col md:flex-row gap-4 ">
-        <div className="w-full mx-10 ">
+        <div className="w-full md:mx-10 ">
           <h2 className="text-lg text-gray-700 font-semibold">
             กรอกข้อความที่ต้องการ
           </h2>
@@ -101,7 +101,7 @@ const Home = () => {
             )}
           </div>
 
-          <div className="flex flex-row gap-4 mt-2">
+          <div className="flex flex-wrap flex-row gap-4 mt-2">
             <button
               onClick={handleFindWord}
               className={
@@ -111,7 +111,7 @@ const Home = () => {
               }
               disabled={hilight !== null}
             >
-              คำต้องห้าม
+              ค้นหาคำละเมิด
             </button>
             <button
               onClick={handleTextWrong}
@@ -122,10 +122,10 @@ const Home = () => {
               }
               disabled={hilight !== null}
             >
-              คำผิด
+              ค้นหาคำผิด
             </button>
 
-            <button onClick={handleEnglish} className={"bg-blue-800 hover:bg-blue-900 text-white py-2 px-2 rounded-md"}>ภาษาอังกฤษ</button>
+            <button onClick={handleEnglish} className={"bg-blue-800 hover:bg-blue-900 text-white py-2 px-2 rounded-md"}>ค้นหาคำผิดภาษาอังกฤษ</button>
             <button
               onClick={resetBtn}
               className={"bg-green-700 hover:bg-green-800 text-white py-2 px-2 rounded-md"}
@@ -135,19 +135,11 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="w-full my-10 md:my-0">
           <h2 className="text-lg text-gray-700 font-semibold">แสดงผล</h2>
 
           <div className="bg-white border-2 border-gray-300 shadow-md rounded-md px-5 py-5 mt-5">
-            <h2 className="text-lg text-gray-900 font-semibold">คำต้องห้าม</h2>
-
-            {/* <ul className="mt-2">
-              {data2.map((item, index) => (
-                <li key={index} className="flex flex-row justify-between mt-1">
-                  - {item.stopwordgroup}{" "}
-                </li>
-              ))}
-            </ul> */}
+            <h2 className="text-lg text-gray-900 font-semibold">คำละเมิด</h2>
 
             <hr className="border-1 border-gray-300 mt-10" />
 
@@ -155,20 +147,10 @@ const Home = () => {
 
             <p>{data_1 || ""}</p>
 
-            {/* <ul className="mt-2">
-              {data.map((item, index) => (
-                <li key={index} className="flex flex-row justify-between mt-1">
-                  {item.editword}{" "}
-                  
-                </li>
-              ))}
-            </ul> */}
-
           </div>
         </div>
       </div>
 
-      {/* {hilight && <HighlightedText text={text} highlights={hilight} />} */}
     </div>
   );
 };
