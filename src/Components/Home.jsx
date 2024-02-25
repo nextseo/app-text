@@ -39,12 +39,11 @@ const Home = () => {
         { text }
       );
 
-      console.log(res.data);
-   
+console.log(res.data);   
       if (res.status === 200) {
         toast.success('ทำรายการสำเร็จ');
-        const test = JSON.parse(res.data)
-        setHiLight(test)
+        // const test = JSON.parse(res.data)
+        setHiLight(res.data)
       }
     } catch (error) {
       console.log(error);
